@@ -12,7 +12,7 @@ interface InventoryItem {
 
 function InventoryModal({ inventory, open, handleClose, darkMode, onClose }: { inventory: InventoryItem[], open: boolean, handleClose: () => void, darkMode: boolean, onClose?: (event: React.SyntheticEvent, reason: "backdropClick" | "escapeKeyDown") => void}) {
   const slotSize = 125; // Square size for each slot (125 looks the best in my opinion)
-  const inventorySlots = 41; // Max inventory slots (Change this if you have a different max inventory slots)
+  const inventorySlots = 25; // Max inventory slots (Change this if you have a different max inventory slots)
 
   const [copiedItem, setCopiedItem] = useState<string | null>(null);
 
