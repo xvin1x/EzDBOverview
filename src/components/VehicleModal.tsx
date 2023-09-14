@@ -8,7 +8,7 @@ interface Vehicle {
   fuel: number;
   engine: number;
   body: number;
-  drivingdistance: string;
+  traveldistance: string;
   mods: {
     [key: string]: number;
   };
@@ -99,7 +99,7 @@ function VehicleModal({ open, vehicles, handleClose, darkMode, onClose }: Vehicl
                     <Typography className="truncate"><strong>Engine:</strong> {convertToPercentage(vehicle.engine)}</Typography>
                     <Typography className="truncate"><strong>Body:</strong> {convertToPercentage(vehicle.body)}</Typography>
                     <Tooltip title="Driving Distance" arrow placement='bottom'>
-                      <Typography className="truncate"><strong>Distance:</strong> {vehicle.drivingdistance}</Typography>
+                      <Typography className="truncate"><strong>Distance:</strong> {vehicle.traveldistance}</Typography>
                     </Tooltip>
                   </Box>
                 </ButtonBase>

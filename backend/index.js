@@ -17,7 +17,7 @@ const db = createConnection({
    host: 'localhost',
    user: 'root',
    password: '',
-   database: 'qbcoreframework_b16ad6',
+   database: 'qbcore',
 });
 
 db.connect((err) => {
@@ -36,7 +36,7 @@ app.get('/getData', (req, res) => {
                player_vehicles.fuel, 
                player_vehicles.engine, 
                player_vehicles.body, 
-               player_vehicles.drivingdistance, 
+               player_vehicles.traveldistance, 
                player_vehicles.mods,
                mdt_data.pfp
         FROM players 
@@ -75,7 +75,7 @@ app.get('/getData', (req, res) => {
                     fuel: row.fuel,
                     engine: row.engine,
                     body: row.body,
-                    drivingdistance: row.drivingdistance,
+                    traveldistance: row.traveldistance,
                     mods: row.mods,
                 });
             }
