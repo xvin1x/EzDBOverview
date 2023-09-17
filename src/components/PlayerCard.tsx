@@ -6,20 +6,20 @@ import MapModal from './MapModal';
 import VehicleModal from './VehicleModal';
 
 interface DataItem {
-    inventory: string;
-    metadata: string;
-    position: string;
-    gang: string;
-    job: string;
-    charinfo: string;
-    money: string;
-    license: string;
-    cid: string;
-    citizenid: string;
-    id: number;
-    name: string;
-    vehicles: string;
-    pfp: string;
+  inventory: string;
+  metadata: string;
+  position: string;
+  gang: string;
+  job: string;
+  charinfo: string;
+  money: string;
+  license: string;
+  cid: string;
+  citizenid: string;
+  id: number;
+  name: string;
+  vehicles: string;
+  pfp: string;
 }
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -56,7 +56,12 @@ function PlayerCard({ item, darkMode, onlinePlayers }: { item: DataItem, darkMod
     const [inventoryOpen, setInventoryOpen] = useState(false);
     const [mapOpen, setMapOpen] = useState(false);
     const [vehicleOpen, setVehicleOpen] = useState(false);
-  
+    const [avatarColor, setAvatarColor] = useState<string>('');
+
+    useEffect(() => {
+      setAvatarColor(getRandomColor()); /* This makes sure the icon only changes color when page is loaded/reloaded */
+    }, []);
+
     const handleOpenInventory = (e: React.MouseEvent) => {
       e.stopPropagation(); // Makes sure the PlayerCard doesn't close when clicking the button
       setInventoryOpen(true);
@@ -113,6 +118,7 @@ function PlayerCard({ item, darkMode, onlinePlayers }: { item: DataItem, darkMod
     const isOnline = onlinePlayers.some(player => player.citizenid === item.citizenid);
   
     const hasPfp = item.pfp && item.pfp !== "";
+
     if (!item.license) {
       return null;
     }
@@ -131,23 +137,23 @@ function PlayerCard({ item, darkMode, onlinePlayers }: { item: DataItem, darkMod
           <Grid container spacing={2}>
               <Grid item container xs={12} justifyContent="space-between">
                 {isOnline ? (
-                  <StyledBadge
-                    overlap="circular"
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                    variant="dot"
-                  >
-                    {hasPfp ? (
-                      <Avatar src={item.pfp}>{charInfo.firstname[0].toUpperCase()}</Avatar>
-                    ) : (
-                      <Avatar sx={{ bgcolor: getRandomColor() }}>{charInfo.firstname[0].toUpperCase()}</Avatar>
-                    )}
-                  </StyledBadge>
+                    <StyledBadge
+                        overlap="circular"
+                        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                        variant="dot"
+                    >
+                        {hasPfp ? (
+                            <Avatar src={item.pfp}>{charInfo.firstname[0].toUpperCase()}</Avatar>
+                        ) : (
+                            <Avatar sx={{ bgcolor: avatarColor }}>{charInfo.firstname[0].toUpperCase()}</Avatar>
+                        )}
+                    </StyledBadge>
                 ) : (
-                  hasPfp ? (
-                    <Avatar src={item.pfp}>{charInfo.firstname[0].toUpperCase()}</Avatar>
-                  ) : (
-                    <Avatar sx={{ bgcolor: getRandomColor() }}>{charInfo.firstname[0].toUpperCase()}</Avatar>
-                  )
+                    hasPfp ? (
+                        <Avatar src={item.pfp}>{charInfo.firstname[0].toUpperCase()}</Avatar>
+                    ) : (
+                        <Avatar sx={{ bgcolor: avatarColor }}>{charInfo.firstname[0].toUpperCase()}</Avatar>
+                    )
                 )}
                 <Typography variant="h6" component="div" onClick={handleTextMouseDown}>{charInfo.firstname} {charInfo.lastname}</Typography>
                 <Typography variant="h5" component="div" onClick={handleTextMouseDown}>{item.name}</Typography>
